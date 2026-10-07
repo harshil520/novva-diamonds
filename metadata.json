@@ -1,0 +1,6 @@
+{
+  "name": "Novva Diamonds",
+  "description": "Certified Brilliance. Delivered Worldwide. Direct-from-source certified natural and lab-grown loose diamonds from Surat, Gujarat, India with international concierge service.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
