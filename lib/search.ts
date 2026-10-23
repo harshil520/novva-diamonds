@@ -1,7 +1,7 @@
 import { diamondsData } from "@/data/diamonds";
 import type { Diamond } from "@/types/diamond";
 
-/** Multi-parameter lookup used by the global search palette (ID, cert, shape, 4Cs, carat, price). */
+/** Multi-parameter lookup used by the global search palette (ID, cert, shape, 4Cs, carat). */
 export function searchDiamonds(query: string): Diamond[] {
   const trimmed = query.trim().toLowerCase();
   if (!trimmed) return diamondsData.filter((d) => d.featured).slice(0, 5);
@@ -22,7 +22,6 @@ export function searchDiamonds(query: string): Diamond[] {
     if (diamond.cut.toLowerCase().includes(trimmed)) return true;
     if (!isNaN(numericQuery)) {
       if (Math.abs(diamond.carat - numericQuery) < 0.15) return true;
-      if (numericQuery >= 100 && Math.abs(diamond.indicativePriceUSD - numericQuery) <= 150) return true;
     }
     if (diamond.description?.toLowerCase().includes(trimmed)) return true;
     return false;
@@ -35,5 +34,5 @@ export const QUICK_SEARCHES = [
   { label: "Round brilliant", q: "Round" },
   { label: "Oval", q: "Oval" },
   { label: "GIA certified", q: "GIA" },
-  { label: "Under $500", q: "400" },
+  { label: "Over 2 ct", q: "2" },
 ];

@@ -5,18 +5,16 @@ import { useSearchParams } from "next/navigation";
 import { diamondsData, allDiamondShapes, allDiamondColors, allDiamondClarities, allDiamondCuts } from "@/data/diamonds";
 import type { DiamondClarity, DiamondColor, DiamondCut, DiamondOrigin, DiamondShape } from "@/types/diamond";
 
-export type SortKey = "carat-desc" | "carat-asc" | "price-desc" | "price-asc" | "newest";
+export type SortKey = "carat-desc" | "carat-asc" | "newest";
 export type Lab = "GIA" | "IGI";
 
-export const CARAT_MIN = 0.3;
-export const CARAT_MAX = 2.5;
+export const CARAT_MIN = 1;
+export const CARAT_MAX = 3.5;
 
 export const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "carat-desc", label: "Carat, high to low" },
   { value: "carat-asc", label: "Carat, low to high" },
-  { value: "price-desc", label: "Price, high to low" },
-  { value: "price-asc", label: "Price, low to high" },
-  { value: "newest", label: "Latest certification" },
+  { value: "newest", label: "Newest" },
 ];
 
 export interface FilterState {
@@ -85,7 +83,7 @@ function serialise(f: FilterState): string {
   return p.toString();
 }
 
-/** Same matching rules as the original catalogue search (ID, cert, lab, shape, origin, 4Cs, carat, price). */
+/** Same matching rules as the original catalogue search (ID, cert, lab, shape, origin, 4Cs, carat). */
 function matchesSearch(q: string, d: (typeof diamondsData)[number]) {
   const numeric = parseFloat(q);
   return (
@@ -98,8 +96,7 @@ function matchesSearch(q: string, d: (typeof diamondsData)[number]) {
     (q.includes("color") && q.includes(d.color.toLowerCase())) ||
     d.clarity.toLowerCase().includes(q) ||
     d.cut.toLowerCase().includes(q) ||
-    (!isNaN(numeric) && Math.abs(d.carat - numeric) < 0.15) ||
-    (!isNaN(numeric) && numeric >= 100 && Math.abs(d.indicativePriceUSD - numeric) <= 150)
+    (!isNaN(numeric) && Math.abs(d.carat - numeric) < 0.15)
   );
 }
 
@@ -157,10 +154,6 @@ export function useCatalogFilters() {
             return b.carat - a.carat;
           case "carat-asc":
             return a.carat - b.carat;
-          case "price-desc":
-            return b.indicativePriceUSD - a.indicativePriceUSD;
-          case "price-asc":
-            return a.indicativePriceUSD - b.indicativePriceUSD;
           default:
             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         }

@@ -27,7 +27,7 @@ Certification: ${diamond.certification.laboratory}
 Certificate No: ${diamond.certification.certificateNumber}
 Diamond Reference: ${diamond.id}
 
-Please share the current export price, high-resolution videos, and international delivery terms.
+Please share the price, a video and delivery details.
 
 Thank you.`;
 
@@ -49,36 +49,36 @@ export function getConciergeWhatsAppUrl(context: {
     case "sourcing":
       message = `Hello Novva Diamonds,
 
-I am seeking a specific certified diamond with the following parameters:
+I am looking for a diamond:
 - Shape: ${context.shape || "Open"}
-- Carat Range: ${context.carat || "Flexible"}
-- Target Budget: ${context.budget || "Open"}
+- Carat: ${context.carat || "Flexible"}
+- Budget: ${context.budget || "Open"}
 
-Could you please review your direct Surat Bourse inventory and suggest suitable stones?`;
+Can you suggest some options?`;
       break;
 
     case "bulk":
       message = `Hello Novva Diamonds,
 
-I am a jeweler / diamond merchant inquiring about bulk sourcing and parcel orders of certified diamonds from Surat. Please share your current wholesale list and export terms.`;
+I am a jeweller and would like to buy diamonds in bulk. Please share your list and terms.`;
       break;
 
     case "catalog":
       message = `Hello Novva Diamonds,
 
-I am browsing your certified loose diamond catalog and would appreciate personal assistance with selection and diamond inspection.`;
+I am looking at your diamonds and would like some help choosing.`;
       break;
 
     case "certification":
       message = `Hello Novva Diamonds,
 
-I have an inquiry regarding diamond certification standards (GIA / IGI) and verifying laser inscriptions before purchase.`;
+I have a question about GIA / IGI certificates.`;
       break;
 
     default:
       message = `Hello Novva Diamonds,
 
-I would like to learn more about your certified diamond inventory and direct export from the Surat Diamond Bourse.`;
+I would like to know more about your diamonds.`;
       break;
   }
 

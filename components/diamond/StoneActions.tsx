@@ -7,7 +7,6 @@ import { Copy, ExternalLink, ShieldCheck } from "lucide-react";
 import type { Diamond } from "@/types/diamond";
 import { getDiamondWhatsAppUrl } from "@/lib/whatsapp";
 import { stoneMailto } from "@/lib/mailto";
-import { useCurrency } from "@/context/CurrencyContext";
 import { useUI } from "@/components/providers/UIProvider";
 import { useToast } from "@/components/providers/ToastProvider";
 import { Button, ButtonLink, ArrowGlyph } from "@/components/ui/Button";
@@ -15,21 +14,20 @@ import { WhatsAppIcon } from "@/components/ui/icons";
 import { EASE_LUXE } from "@/lib/motion";
 import { useHydrated } from "@/hooks/use-hydrated";
 
-
 /** Primary conversion block: WhatsApp, private enquiry form, email. */
 export function StoneActions({ diamond }: { diamond: Diamond }) {
   const { openEnquiry } = useUI();
   return (
     <div className="space-y-3">
       <ButtonLink href={getDiamondWhatsAppUrl(diamond)} size="lg" className="w-full">
-        <WhatsAppIcon size={17} /> Request price & video on WhatsApp
+        <WhatsAppIcon size={17} /> Ask on WhatsApp
       </ButtonLink>
       <div className="grid grid-cols-2 gap-3">
         <Button variant="outline" size="lg" className="w-full px-4" onClick={() => openEnquiry({ diamond })}>
-          Private enquiry
+          Send enquiry
         </Button>
         <ButtonLink href={stoneMailto(diamond)} variant="outline" size="lg" className="w-full px-4">
-          Email the vault
+          Email us
         </ButtonLink>
       </div>
     </div>
@@ -70,13 +68,13 @@ export function CertificateCard({ diamond }: { diamond: Diamond }) {
             rel="noopener noreferrer"
             className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-ink/20 px-3.5 text-[12px] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-ivory"
           >
-            Verify at {laboratory} <ExternalLink className="h-3 w-3" />
+            Verify <ExternalLink className="h-3 w-3" />
           </a>
         )}
       </div>
       <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-line pt-4 text-[12.5px]">
         <div>
-          <dt className="text-mute">Girdle inscription</dt>
+          <dt className="text-mute">Laser inscription</dt>
           <dd className="numeric mt-0.5 font-medium">
             {laboratory} {certificateNumber}
           </dd>
@@ -92,9 +90,8 @@ export function CertificateCard({ diamond }: { diamond: Diamond }) {
   );
 }
 
-/** Mobile sticky price + WhatsApp bar, revealed after the primary actions scroll away. */
+/** Mobile sticky WhatsApp bar, revealed after the primary actions scroll away. */
 export function MobileStoneBar({ diamond, watchId }: { diamond: Diamond; watchId: string }) {
-  const { formatPrice } = useCurrency();
   const [show, setShow] = useState(false);
   const mounted = useHydrated();
 
@@ -119,10 +116,9 @@ export function MobileStoneBar({ diamond, watchId }: { diamond: Diamond; watchId
         >
           <div className="flex items-center gap-4">
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[12px] text-mute">
+              <p className="truncate text-[14px] font-medium">
                 {diamond.carat.toFixed(2)} ct {diamond.shape} · {diamond.color} · {diamond.clarity}
               </p>
-              <p className="numeric text-[17px] font-medium">{formatPrice(diamond.indicativePriceUSD)}</p>
             </div>
             <a
               href={getDiamondWhatsAppUrl(diamond)}
@@ -130,7 +126,7 @@ export function MobileStoneBar({ diamond, watchId }: { diamond: Diamond; watchId
               rel="noopener noreferrer"
               className="group inline-flex h-12 items-center gap-2 rounded-full bg-ink px-5 text-[13.5px] font-medium text-ivory"
             >
-              <WhatsAppIcon size={16} /> Enquire <ArrowGlyph />
+              <WhatsAppIcon size={16} /> Ask <ArrowGlyph />
             </a>
           </div>
         </motion.div>

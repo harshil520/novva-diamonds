@@ -47,17 +47,16 @@ export default function UIProvider({ children }: { children: React.ReactNode }) 
     <UIContext.Provider value={{ openSearch, openEnquiry }}>
       {children}
       <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
-      <Modal open={!!enquiry} onClose={() => setEnquiry(null)} label="Private enquiry" className="max-w-xl">
+      <Modal open={!!enquiry} onClose={() => setEnquiry(null)} label="Send an enquiry" className="max-w-xl">
         {enquiry && (
           <div className="max-h-[88vh] overflow-y-auto p-6 sm:p-9">
-            <p className="eyebrow">Private enquiry</p>
-            <h2 className="display mt-3 text-[2rem] sm:text-[2.4rem]">
+            <h2 className="display text-[2rem] sm:text-[2.4rem]">
               {enquiry.diamond
                 ? `${enquiry.diamond.carat.toFixed(2)} ct ${enquiry.diamond.shape}`
-                : "How may we help?"}
+                : "Send an enquiry"}
             </h2>
             <p className="mt-2 text-[13.5px] leading-relaxed text-mute">
-              A diamond specialist — not a call centre — will reply with pricing, video and delivery terms.
+              We will reply with details, a video and delivery options.
             </p>
             <div className="mt-7">
               <EnquiryForm key={enquiry.key} diamond={enquiry.diamond} topic={enquiry.topic} />

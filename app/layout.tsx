@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { CurrencyProvider } from "@/context/CurrencyContext";
 import { siteConfig } from "@/config/config";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import ToastProvider from "@/components/providers/ToastProvider";
@@ -29,22 +28,22 @@ const sans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Novva Diamonds — Certified Loose Diamonds & Direct Exporter",
+  title: "Novva Diamonds | Certified Loose Diamonds from Surat",
   description:
-    "Direct-from-source certified natural and lab-grown loose diamonds from the Surat Diamond Bourse. GIA and IGI certified inventory with insured worldwide export.",
+    "Certified natural and lab-grown loose diamonds from Surat, India. GIA and IGI certified, with insured worldwide shipping.",
   openGraph: {
-    title: "Novva Diamonds — Certified Brilliance. Delivered Worldwide.",
+    title: "Novva Diamonds | Certified Loose Diamonds from Surat",
     description:
-      "Direct-from-source certified natural and lab-grown loose diamonds from Surat, Gujarat, India. GIA & IGI verified inventory.",
+      "Certified natural and lab-grown loose diamonds from Surat, India. GIA and IGI certified.",
     type: "website",
     siteName: siteConfig.brand.name,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Novva Diamonds — Certified Loose Diamonds & Direct Exporter",
+    title: "Novva Diamonds | Certified Loose Diamonds from Surat",
     description:
-      "Direct-from-source certified natural and lab-grown loose diamonds from Surat, Gujarat, India. GIA & IGI verified inventory.",
+      "Certified natural and lab-grown loose diamonds from Surat, India. GIA and IGI certified.",
   },
   alternates: {
     canonical: "/",
@@ -73,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       postalCode: "395007",
       addressCountry: "IN",
     },
-    currenciesAccepted: "USD, INR, EUR, AUD, CAD, KZT",
     paymentAccepted: "Bank Wire, Escrow",
     areaServed: ["US", "CA", "AU", "EU", "KZ", "IN"],
   };
@@ -91,24 +89,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <CurrencyProvider>
-          <ToastProvider>
-            <SmoothScroll>
-              <UIProvider>
-                <Preloader />
-                <Suspense fallback={null}>
-                  <RouteProgress />
-                </Suspense>
-                <Header />
-                <main id="main" className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-                <ConciergeButton />
-              </UIProvider>
-            </SmoothScroll>
-          </ToastProvider>
-        </CurrencyProvider>
+        <ToastProvider>
+          <SmoothScroll>
+            <UIProvider>
+              <Preloader />
+              <Suspense fallback={null}>
+                <RouteProgress />
+              </Suspense>
+              <Header />
+              <main id="main" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+              <ConciergeButton />
+            </UIProvider>
+          </SmoothScroll>
+        </ToastProvider>
       </body>
     </html>
   );

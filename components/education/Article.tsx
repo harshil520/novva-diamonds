@@ -8,11 +8,9 @@ import { cn } from "@/lib/utils";
 type Segment = string | { em: string };
 
 export const GUIDES = [
-  { href: "/education/4cs", title: "The 4Cs", short: "Cut, colour, clarity & carat" },
-  { href: "/education/certification", title: "Certification", short: "Reports & laser inscriptions" },
-  { href: "/education/gia", title: "The GIA standard", short: "History & report anatomy" },
-  { href: "/education/igi", title: "The IGI standard", short: "Lab-grown leadership" },
-  { href: "/education/natural-vs-lab-grown", title: "Natural vs lab-grown", short: "An objective comparison" },
+  { href: "/education/4cs", title: "The 4Cs", short: "Cut, colour, clarity and carat" },
+  { href: "/education/certification", title: "Certificates", short: "How to check a GIA or IGI report" },
+  { href: "/education/natural-vs-lab-grown", title: "Natural vs lab-grown", short: "The differences, simply explained" },
 ];
 
 export function ArticleShell({
@@ -23,7 +21,7 @@ export function ArticleShell({
   current,
   children,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: Segment[];
   intro: React.ReactNode;
   crumb: string;
@@ -39,14 +37,14 @@ export function ArticleShell({
         eyebrow={eyebrow}
         title={title}
         intro={intro}
-        crumbs={[{ label: "Education", href: "/education" }, { label: crumb }]}
+        crumbs={[{ label: "Diamond Guide", href: "/education" }, { label: crumb }]}
       />
       <div className="shell grid gap-14 lg:grid-cols-12">
         <aside className="hidden lg:col-span-3 lg:block" aria-label="Guides">
           <nav className="sticky top-28">
             <p className="eyebrow">Guides</p>
             <ul className="mt-5 space-y-1">
-              {GUIDES.map((g, i) => (
+              {GUIDES.map((g) => (
                 <li key={g.href}>
                   <Link
                     href={g.href}
@@ -56,7 +54,6 @@ export function ArticleShell({
                       g.href === current ? "text-ink" : "text-mute hover:text-ink"
                     )}
                   >
-                    <span className="numeric w-5 text-[11px] text-faint">0{i + 1}</span>
                     <span className={g.href === current ? "font-medium" : ""}>{g.title}</span>
                   </Link>
                 </li>

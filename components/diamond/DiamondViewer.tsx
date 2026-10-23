@@ -77,13 +77,13 @@ export default function DiamondViewer({ diamond }: { diamond: Diamond }) {
         <div className="pointer-events-none absolute inset-x-4 top-4 flex items-start justify-between sm:inset-x-6 sm:top-6">
           <span className="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-[11px] font-medium">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            {diamond.availability === "Available" || !diamond.availability ? "In the Surat vault" : diamond.availability}
+            {diamond.availability === "Available" || !diamond.availability ? "Available" : diamond.availability}
           </span>
           {effectiveMode === "3d" && status === "ready" && (
             <span className="hidden text-[11px] text-mute sm:block">Drag to rotate</span>
           )}
           {status === "loading" && effectiveMode === "3d" && (
-            <span className="text-[11px] text-mute">Rendering stone…</span>
+            <span className="text-[11px] text-mute">Loading…</span>
           )}
         </div>
 
@@ -92,10 +92,10 @@ export default function DiamondViewer({ diamond }: { diamond: Diamond }) {
           <div className="flex items-center gap-1 rounded-full border border-line bg-paper p-1 shadow-sm" role="toolbar" aria-label="Viewer controls">
             {status !== "fallback" && (
               <div className="flex rounded-full bg-porcelain p-0.5">
-                <ToolButton active={effectiveMode === "3d"} onClick={() => setMode("3d")} label="Live 3D view">
+                <ToolButton active={effectiveMode === "3d"} onClick={() => setMode("3d")} label="3D view">
                   <Box className="h-4 w-4" strokeWidth={1.4} /> <span className="hidden sm:inline">3D</span>
                 </ToolButton>
-                <ToolButton active={effectiveMode === "photo"} onClick={() => setMode("photo")} label="Studio photograph">
+                <ToolButton active={effectiveMode === "photo"} onClick={() => setMode("photo")} label="Photo">
                   <ImageIcon className="h-4 w-4" strokeWidth={1.4} /> <span className="hidden sm:inline">Photo</span>
                 </ToolButton>
               </div>

@@ -18,10 +18,10 @@ import { EASE_LUXE } from "@/lib/motion";
 gsap.registerPlugin(ScrollTrigger);
 
 const METRICS = [
-  { value: 90, suffix: "%+", label: "of the world’s diamonds are cut in Surat" },
-  { value: 100, suffix: "%", label: "GIA & IGI certified, laser-inscribed" },
-  { value: 10, suffix: "", label: "master-cut silhouettes in stock" },
-  { value: 3, suffix: "–5 days", label: "insured, armoured delivery worldwide" },
+  { value: 100, suffix: "%", label: "GIA or IGI certified" },
+  { value: 1, suffix: " ct+", label: "Minimum carat weight" },
+  { value: 10, suffix: "", label: "Diamond shapes" },
+  { value: 3, suffix: "–5 days", label: "Insured worldwide delivery" },
 ];
 
 export default function Hero() {
@@ -98,13 +98,7 @@ export default function Hero() {
             transition={{ delay: 1.4, duration: 1 }}
             className="pointer-events-none absolute inset-0 hidden text-[10.5px] uppercase tracking-[0.18em] text-mute lg:block"
           >
-            <span className="absolute left-[0%] top-[16%] flex items-center gap-3">
-              Refractive index 2.417 <span className="h-px w-14 bg-line-strong" />
-            </span>
-            <span className="absolute bottom-[18%] right-[0%] flex items-center gap-3">
-              <span className="h-px w-14 bg-line-strong" /> 57 facets · Round brilliant
-            </span>
-            <span className="absolute bottom-[6%] left-1/2 -translate-x-1/2 normal-case tracking-[0.04em]">Drag to turn the stone</span>
+            <span className="absolute bottom-[6%] left-1/2 -translate-x-1/2 normal-case tracking-[0.04em]">Drag to rotate</span>
           </motion.div>
         </div>
 
@@ -116,13 +110,13 @@ export default function Hero() {
             animate={ready ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: EASE_LUXE }}
           >
-            Private diamond house · Surat, India
+            Surat, India
           </motion.p>
           <TextReveal
             as="h1"
             play={ready}
             delay={0.1}
-            segments={["Certified\n", { em: "brilliance," }, "\ndelivered worldwide."]}
+            segments={["Certified\n", { em: "diamonds," }, "\nshipped worldwide."]}
             className="display mt-5 text-[clamp(2.8rem,6.1vw,6.1rem)] leading-[0.95] tracking-[-0.035em]"
           />
           <motion.div
@@ -131,15 +125,14 @@ export default function Hero() {
             transition={{ duration: 1.1, delay: 0.75, ease: EASE_LUXE }}
           >
             <p className="mt-6 max-w-md text-[15.5px] leading-relaxed text-ink-soft/85">
-              Natural and lab-grown diamonds, selected on the bourse floor and certified by GIA or IGI — offered
-              directly to private clients and jewellers, without the layers in between.
+              Natural and lab-grown diamonds from 1 carat, certified by GIA or IGI.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ButtonLink href="/diamonds" size="lg">
-                View the collection <ArrowGlyph />
+                View diamonds <ArrowGlyph />
               </ButtonLink>
               <ButtonLink href={getConciergeWhatsAppUrl({ topic: "general" })} variant="outline" size="lg">
-                <WhatsAppIcon size={16} /> Speak to a specialist
+                <WhatsAppIcon size={16} /> WhatsApp us
               </ButtonLink>
             </div>
             <button
@@ -148,7 +141,7 @@ export default function Hero() {
               className="group mt-7 flex w-full max-w-md items-center gap-3 border-b border-line-strong pb-3 text-left text-[13.5px] text-mute transition-colors hover:border-ink hover:text-ink"
             >
               <Search className="h-4 w-4" strokeWidth={1.5} />
-              <span className="flex-1">Find a stone by ID, certificate or carat</span>
+              <span className="flex-1">Search by ID, certificate or carat</span>
               <kbd className="hidden rounded border border-line px-1.5 text-[10px] sm:inline">⌘K</kbd>
             </button>
           </motion.div>

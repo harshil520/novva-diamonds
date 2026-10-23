@@ -4,23 +4,22 @@ import { ArticleShell, ArticleSection, Prose, FactGrid, ArticleCTA } from "@/com
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Diamond Certification Guide | Novva Diamonds",
-  description:
-    "Learn why independent certification from GIA and IGI is essential for certified loose diamonds and how to verify reports and laser inscriptions.",
+  title: "Diamond Certificates | Novva Diamonds",
+  description: "What a GIA or IGI certificate is, and how to check one.",
 };
 
 const STEPS = [
   {
-    t: "Cross-check the report number online",
-    d: "Enter the certificate number into the official GIA Report Check or IGI Verify portal. Confirm that carat weight, colour, clarity and dimensions match exactly.",
+    t: "Check the number online",
+    d: "Enter the report number on the GIA or IGI website. Make sure the carat, colour and clarity match.",
   },
   {
-    t: "Inspect the girdle laser inscription",
-    d: "With a 10× gemological loupe or microscope, locate the laser-inscribed laboratory logo and report number on the stone’s outer perimeter.",
+    t: "Find the laser number",
+    d: "The same number is laser-engraved on the edge of the diamond. A jeweller can show it to you with a loupe.",
   },
   {
-    t: "Confirm optical measurements",
-    d: "Verify length, width and depth with digital micrometer calipers — tolerances should sit within 0.02 mm of the certified record.",
+    t: "Check the size",
+    d: "The measurements in millimetres should match the report.",
   },
 ];
 
@@ -28,28 +27,23 @@ export default function CertificationGuidePage() {
   return (
     <ArticleShell
       current="/education/certification"
-      crumb="Certification"
-      eyebrow="Trust & independence"
-      title={["Certification,", { em: "inscriptions" }, "& verification."]}
-      intro="A diamond certificate is not an appraisal or an invoice. It is an objective scientific report, issued by an accredited gemological laboratory, identifying the physical and optical properties of one specific stone."
+      crumb="Certificates"
+      title={["Diamond", { em: "certificates" }]}
+      intro="A certificate is a report from an independent lab. It confirms the diamond's carat, colour, clarity and cut."
     >
-      <ArticleSection title={<>Why independent grading <em>is essential</em></>}>
+      <ArticleSection title="Who issues them">
         <Prose>
-          <p>
-            In-house grading or “seller certificates” represent a clear conflict of interest. An independent laboratory
-            has no financial stake in the sale of the diamond — its reputation rests solely on scientific precision and
-            consistency.
-          </p>
+          <p>We only sell diamonds graded by an independent lab, never by the seller.</p>
         </Prose>
         <FactGrid
           items={[
-            { title: "GIA — Gemological Institute of America", body: "The global benchmark for natural diamonds. Renowned for strict clarity and colour grading standards." },
-            { title: "IGI — International Gemological Institute", body: "The leader in certifying laboratory-grown diamonds, with detailed spectroscopic growth identification." },
+            { title: "GIA", body: "The best-known lab for natural diamonds." },
+            { title: "IGI", body: "The leading lab for lab-grown diamonds." },
           ]}
         />
       </ArticleSection>
 
-      <ArticleSection title={<>Verify a diamond <em>in three steps</em></>}>
+      <ArticleSection title="How to check a certificate">
         <ol className="border-t border-line">
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.t} delay={i * 0.08} className="grid grid-cols-[3.5rem_1fr] gap-4 border-b border-line py-7">
@@ -65,8 +59,8 @@ export default function CertificationGuidePage() {
 
       <ArticleCTA
         title="Questions about a certificate?"
-        body="Our Surat specialists will review any report with you, facet by facet."
-        actions={[{ label: "Speak with a gemologist", href: "/contact" }]}
+        body="We are happy to go through any report with you."
+        actions={[{ label: "Contact us", href: "/contact" }]}
       />
     </ArticleShell>
   );

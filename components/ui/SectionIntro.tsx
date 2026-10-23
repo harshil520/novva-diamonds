@@ -15,7 +15,7 @@ export default function SectionIntro({
   className,
   as = "h2",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: Segment[];
   description?: React.ReactNode;
   action?: { label: string; href: string };
@@ -26,10 +26,12 @@ export default function SectionIntro({
   if (align === "center") {
     return (
       <div className={cn("mx-auto max-w-3xl text-center", className)}>
-        <Reveal>
-          <p className="eyebrow">{eyebrow}</p>
-        </Reveal>
-        <TextReveal as={as} segments={title} className="display mt-5 text-[clamp(2.3rem,4.8vw,4.4rem)] leading-[1.02]" />
+        {eyebrow && (
+          <Reveal>
+            <p className="eyebrow">{eyebrow}</p>
+          </Reveal>
+        )}
+        <TextReveal as={as} segments={title} className={cn("display text-[clamp(2.3rem,4.8vw,4.4rem)] leading-[1.02]", eyebrow && "mt-5")} />
         {description && (
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-mute">{description}</p>
@@ -41,10 +43,12 @@ export default function SectionIntro({
   return (
     <div className={cn("grid items-end gap-6 lg:grid-cols-12 lg:gap-8", className)}>
       <div className={align === "left" ? "lg:col-span-9" : "lg:col-span-7"}>
-        <Reveal>
-          <p className="eyebrow">{eyebrow}</p>
-        </Reveal>
-        <TextReveal as={as} segments={title} className="display mt-5 text-[clamp(2.3rem,4.8vw,4.4rem)] leading-[1.02]" />
+        {eyebrow && (
+          <Reveal>
+            <p className="eyebrow">{eyebrow}</p>
+          </Reveal>
+        )}
+        <TextReveal as={as} segments={title} className={cn("display text-[clamp(2.3rem,4.8vw,4.4rem)] leading-[1.02]", eyebrow && "mt-5")} />
       </div>
       {(description || action) && align === "split" && (
         <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.12}>

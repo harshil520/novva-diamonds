@@ -67,7 +67,7 @@ export default function Preloader() {
         ))}
       </div>
       <p data-sub className="eyebrow mt-6">
-        Certified brilliance · Surat
+        Certified diamonds · Surat
       </p>
       <div className="mt-10 h-px w-40 overflow-hidden bg-line">
         <div data-bar className="h-full w-full origin-left scale-x-0 bg-ink" />

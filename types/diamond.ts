@@ -56,7 +56,6 @@ export interface Diamond {
   tablePercentage?: number;
   depthPercentage?: number;
   ratio?: number;
-  indicativePriceUSD: number; // For multi-currency display, explicitly marked indicative
   images: string[];
   video360?: string;
   viewer3D?: string;
@@ -75,5 +74,5 @@ export interface DiamondFiltersState {
   laboratory: ("GIA" | "IGI")[];
   caratMin: number;
   caratMax: number;
-  sortBy: "carat-asc" | "carat-desc" | "price-asc" | "price-desc" | "newest";
+  sortBy: "carat-asc" | "carat-desc" | "newest";
 }

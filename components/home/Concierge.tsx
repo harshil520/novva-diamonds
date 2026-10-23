@@ -11,7 +11,7 @@ import { siteConfig } from "@/config/config";
 import { useUI } from "@/components/providers/UIProvider";
 import { EASE_LUXE } from "@/lib/motion";
 
-const SOURCING_MAIL = `mailto:${siteConfig.contact.email}?subject=Custom%20Diamond%20Sourcing%20Request&body=Hello%20Novva%20Diamonds%20Team,%0A%0AI%20am%20looking%20for%20a%20specific%20diamond%20with%20the%20following%20criteria:%0A-%20Origin%20(Natural%20or%20Lab-Grown):%0A-%20Shape:%0A-%20Carat%20Weight:%0A-%20Color%20/%20Clarity:%0A-%20Grading%20Lab%20(GIA%20/%20IGI):%0A-%20Target%20Budget:%0A-%20Delivery%20City/Country:%0A%0AThank%20you.`;
+const SOURCING_MAIL = `mailto:${siteConfig.contact.email}?subject=Diamond%20Request&body=Hello%20Novva%20Diamonds,%0A%0AI%20am%20looking%20for:%0A-%20Natural%20or%20lab-grown:%0A-%20Shape:%0A-%20Carat:%0A-%20Colour%20/%20clarity:%0A-%20Certificate%20(GIA%20/%20IGI):%0A-%20Delivery%20country:%0A%0AThank%20you.`;
 
 export default function Concierge() {
   const { openEnquiry } = useUI();
@@ -19,36 +19,30 @@ export default function Concierge() {
   const options = [
     {
       icon: <WhatsAppIcon size={20} />,
-      title: "WhatsApp the trading desk",
-      body: "Send shape, carat, colour, clarity and budget. We check the live floor and reply with stones and video.",
-      meta: "Instant response · 7 days a week",
+      title: "WhatsApp us",
+      body: "Fastest reply. Send the shape, carat and quality you want.",
       href: getConciergeWhatsAppUrl({ topic: "sourcing" }),
     },
     {
       icon: <Mail className="h-5 w-5" strokeWidth={1.3} />,
-      title: "Email full specifications",
-      body: "Purchase mandates, jeweller tenders or multi-stone parcels — answered with a proforma quote and videos.",
-      meta: "Official proforma quote",
+      title: "Email us",
+      body: "Send your full requirements and we will reply with options.",
       href: SOURCING_MAIL,
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-ivory sm:py-36" aria-label="Bespoke sourcing">
+    <section className="relative overflow-hidden bg-ink py-24 text-ivory sm:py-36" aria-label="Request a diamond">
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.07),transparent)]" />
       <div className="shell relative">
         <div className="mx-auto max-w-3xl text-center">
-          <Reveal>
-            <p className="eyebrow text-ivory/50">Bespoke sourcing</p>
-          </Reveal>
           <TextReveal
-            segments={["Looking for", { em: "a particular" }, "diamond?"]}
-            className="display mt-6 text-[clamp(2.6rem,6vw,5.6rem)] leading-[0.98]"
+            segments={["Can't find the", { em: "right diamond?" }]}
+            className="display text-[clamp(2.6rem,6vw,5.6rem)] leading-[0.98]"
           />
           <Reveal delay={0.12}>
             <p className="mx-auto mt-7 max-w-xl text-[15.5px] leading-relaxed text-ivory/60">
-              If the carat, ratio or specification you need is not listed, our Surat desk will search the bourse floor
-              and bring matching stones to you for approval.
+              Tell us what you need and we will find it for you.
             </p>
           </Reveal>
         </div>
@@ -72,23 +66,17 @@ export default function Concierge() {
               </div>
               <h3 className="display mt-10 text-[1.9rem] leading-tight">{o.title}</h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ivory/60">{o.body}</p>
-              <p className="mt-8 text-[11px] uppercase tracking-[0.18em] text-ivory/45">{o.meta}</p>
             </motion.a>
           ))}
         </div>
 
-        <Reveal className="mx-auto mt-10 flex max-w-5xl flex-col items-center justify-between gap-6 border-t border-ivory/15 pt-8 text-[13px] text-ivory/60 md:flex-row">
-          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-            <li>Zero-middleman SDB sourcing</li>
-            <li>360° macro 40× loupe video</li>
-            <li>Insured door-to-door delivery</li>
-          </ul>
+        <Reveal className="mx-auto mt-10 flex max-w-5xl justify-center border-t border-ivory/15 pt-8 text-[13px]">
           <button
             type="button"
             onClick={() => openEnquiry({ topic: "Custom Sourcing" })}
             className="group inline-flex items-center gap-2 font-medium text-ivory"
           >
-            <span className="link-draw">Or send a private enquiry</span> <ArrowGlyph />
+            <span className="link-draw">Or fill in the enquiry form</span> <ArrowGlyph />
           </button>
         </Reveal>
       </div>

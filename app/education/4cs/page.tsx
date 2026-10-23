@@ -1,25 +1,24 @@
 import React from "react";
 import { Metadata } from "next";
-import { ArticleShell, ArticleSection, Prose, FactGrid, ArticleCTA } from "@/components/education/Article";
+import { ArticleShell, ArticleSection, Prose, ArticleCTA } from "@/components/education/Article";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Understanding the 4Cs of Diamonds | Novva Diamonds",
-  description:
-    "Master the 4Cs: Cut, Color, Clarity, and Carat. An in-depth technical analysis written by Surat diamond cutters.",
+  title: "The 4Cs of Diamonds | Novva Diamonds",
+  description: "Cut, colour, clarity and carat, explained simply.",
 };
 
 const COLOR_BANDS = [
-  { grades: "D · E · F", name: "Colourless", body: "Rare and icy, offering zero discernible tint even under 10× master comparison.", tone: "bg-paper" },
-  { grades: "G · H", name: "Near colourless", body: "Face-up completely white in platinum or white gold settings; exceptional commercial value.", tone: "bg-[#f5f2ea]" },
-  { grades: "I · J", name: "Faint warmth", body: "Warm white tint visible from profile; pairs beautifully in yellow or rose gold mountings.", tone: "bg-[#efe8d9]" },
+  { grades: "D · E · F", name: "Colourless", body: "No visible colour.", tone: "bg-paper" },
+  { grades: "G · H", name: "Near colourless", body: "Looks white once set in a ring.", tone: "bg-[#f5f2ea]" },
+  { grades: "I · J", name: "Faint tint", body: "Slight warm tint. Looks good in yellow or rose gold.", tone: "bg-[#efe8d9]" },
 ];
 
 const CLARITY = [
   { g: "FL / IF", n: "Flawless" },
-  { g: "VVS1 / VVS2", n: "Very, very slightly included" },
-  { g: "VS1 / VS2", n: "Very slightly included" },
-  { g: "SI1 / SI2", n: "Slightly included" },
+  { g: "VVS1 / VVS2", n: "Very, very slight marks" },
+  { g: "VS1 / VS2", n: "Very slight marks" },
+  { g: "SI1 / SI2", n: "Slight marks" },
 ];
 
 export default function FourCsPage() {
@@ -27,33 +26,21 @@ export default function FourCsPage() {
     <ArticleShell
       current="/education/4cs"
       crumb="The 4Cs"
-      eyebrow="Gemological benchmark"
-      title={["The 4Cs:", { em: "cut, colour," }, "clarity & carat."]}
-      intro="Established by the Gemological Institute of America in the 1940s, the 4Cs are the universal standard for assessing diamond quality and value. Here is a cutter’s view of what truly matters when selecting a certified stone."
+      title={["The", { em: "4Cs" }]}
+      intro="Cut, colour, clarity and carat are the four things that decide how a diamond looks."
     >
-      <ArticleSection index="01" label="Highest visual impact" title={<>Cut — <em>the architecture of light</em></>}>
+      <ArticleSection title="Cut">
         <Prose>
           <p>
-            Of all four characteristics, <strong>cut</strong> has the greatest influence on a diamond’s beauty. It is not
-            the shape, but the precision with which facets are angled and aligned to manipulate light.
+            Cut is how well the diamond is shaped and polished. A good cut gives more sparkle. It matters more than any of
+            the other Cs.
           </p>
         </Prose>
-        <FactGrid
-          cols={3}
-          items={[
-            { title: "Brilliance", body: "Total internal reflection of white light returned through the crown to the eye." },
-            { title: "Fire", body: "Dispersion — the prism-like separation of white light into spectral flashes." },
-            { title: "Scintillation", body: "Flashes of light and shadow created as the stone or the observer moves." },
-          ]}
-        />
       </ArticleSection>
 
-      <ArticleSection index="02" label="D to J" title={<>Colour — <em>the absence of tint</em></>}>
+      <ArticleSection title="Colour">
         <Prose>
-          <p>
-            In white diamonds, colour grading measures the <em>absence</em> of colour. A chemically pure, structurally
-            perfect diamond has no hue and transmits light with absolute clarity.
-          </p>
+          <p>Graded from D (no colour) to Z. The less colour, the rarer the diamond.</p>
         </Prose>
         <div className="mt-8 overflow-hidden rounded-[22px] border border-line">
           {COLOR_BANDS.map((b, i) => (
@@ -66,12 +53,9 @@ export default function FourCsPage() {
         </div>
       </ArticleSection>
 
-      <ArticleSection index="03" label="FL to SI2" title={<>Clarity — <em>microscopic purity</em></>}>
+      <ArticleSection title="Clarity">
         <Prose>
-          <p>
-            Diamonds form under enormous geological forces. As crystals grow, microscopic internal features (inclusions)
-            and surface irregularities (blemishes) develop. Clarity measures their size, number, position and nature.
-          </p>
+          <p>Clarity shows how many tiny marks a diamond has inside or on its surface. Most are too small to see.</p>
         </Prose>
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {CLARITY.map((c, i) => (
@@ -84,20 +68,19 @@ export default function FourCsPage() {
         </div>
       </ArticleSection>
 
-      <ArticleSection index="04" label="Mass, not size" title={<>Carat — <em>the measure of weight</em></>}>
+      <ArticleSection title="Carat">
         <Prose>
           <p>
-            One metric carat equals exactly 200 milligrams (0.20 grams). A common misconception is that carat denotes
-            visual footprint. A poorly cut 1.50 carat stone with excessive depth can appear smaller face-up than a
-            well-proportioned 1.30 carat stone. Always read millimetre measurements alongside carat weight.
+            Carat is weight, not size. One carat is 0.2 grams. Two diamonds with the same weight can look different in
+            size, so check the measurements in millimetres too.
           </p>
         </Prose>
       </ArticleSection>
 
       <ArticleCTA
-        title="Put the 4Cs into practice."
-        body="Browse verified inventory filtered by exact colour, clarity and cut parameters."
-        actions={[{ label: "Explore certified inventory", href: "/diamonds" }]}
+        title="Find your diamond"
+        body="Filter by colour, clarity, cut and carat."
+        actions={[{ label: "View diamonds", href: "/diamonds" }]}
       />
     </ArticleShell>
   );

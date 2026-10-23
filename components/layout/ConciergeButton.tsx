@@ -30,14 +30,8 @@ export default function ConciergeButton() {
   // The stone page carries its own sticky action bar on mobile
   const onStonePage = /^\/diamonds\/[^/]+$/.test(pathname);
 
-  let topic: "catalog" | "general" = "general";
-  let label = "Speak with a specialist";
-  if (pathname.startsWith("/diamonds")) {
-    topic = "catalog";
-    label = "Need help choosing?";
-  } else if (pathname.startsWith("/education")) {
-    label = "Ask a gemologist";
-  }
+  const topic: "catalog" | "general" = pathname.startsWith("/diamonds") ? "catalog" : "general";
+  const label = "Need help? Chat with us";
 
   return (
     <div className={`fixed bottom-5 right-5 z-40 flex items-center gap-3 sm:bottom-7 sm:right-7 ${onStonePage ? "max-lg:hidden" : ""}`}>

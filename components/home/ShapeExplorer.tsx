@@ -62,22 +62,7 @@ export default function ShapeExplorer() {
   return (
     <section ref={sectionRef} className="relative py-24 sm:py-32" aria-label="Explore by shape">
       <div className="shell">
-        <div className="grid items-end gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <p className="eyebrow">Explore by shape</p>
-            </Reveal>
-            <TextReveal
-              segments={["Ten silhouettes.\n", { em: "One standard" }, "of light."]}
-              className="display mt-5 text-[clamp(2.4rem,5vw,4.6rem)] leading-[1]"
-            />
-          </div>
-          <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.15}>
-            <p className="text-[15px] leading-relaxed text-mute">
-              Every cut handles light differently. Turn each stone in real time, then see what we hold in that shape.
-            </p>
-          </Reveal>
-        </div>
+        <TextReveal segments={["Shop by", { em: "shape" }]} className="display text-[clamp(2.4rem,5vw,4.6rem)] leading-[1]" />
 
         {/* Mobile shape strip */}
         <div ref={stripRef} className="no-scrollbar -mx-5 mt-12 flex gap-2 overflow-x-auto px-5 lg:hidden" role="tablist" aria-label="Diamond shapes">
@@ -105,7 +90,7 @@ export default function ShapeExplorer() {
           {/* Desktop list */}
           <div className="hidden lg:col-span-4 lg:block" role="tablist" aria-label="Diamond shapes" aria-orientation="vertical">
             <ul className="border-t border-line">
-              {allDiamondShapes.map((s, i) => {
+              {allDiamondShapes.map((s) => {
                 const on = active === s;
                 return (
                   <li key={s} className="relative border-b border-line">
@@ -117,9 +102,6 @@ export default function ShapeExplorer() {
                       onFocus={() => choose(s)}
                       className="group flex w-full items-center gap-5 py-[0.9rem] text-left"
                     >
-                      <span className={cn("numeric w-6 text-[11px] transition-colors", on ? "text-ink" : "text-faint")}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
                       <span
                         className={cn(
                           "display flex-1 text-[1.75rem] leading-none transition-all duration-500 ease-[var(--ease-luxe)]",
@@ -129,7 +111,7 @@ export default function ShapeExplorer() {
                         {s}
                       </span>
                       <span className={cn("text-[12px] transition-colors", on ? "text-ink-soft" : "text-faint")}>
-                        {counts[s]} {counts[s] === 1 ? "stone" : "stones"}
+                        {counts[s]}
                       </span>
                     </button>
                     {on && !paused && inView && (
@@ -195,7 +177,7 @@ export default function ShapeExplorer() {
                 href={`/diamonds?shape=${active}`}
                 className="group inline-flex items-center gap-3 self-end rounded-full border border-ink/20 py-2.5 pl-5 pr-2.5 text-[13.5px] font-medium transition-colors duration-500 hover:border-ink hover:bg-ink hover:text-ivory"
               >
-                {counts[active] ? `View ${counts[active]} ${active} ${counts[active] === 1 ? "stone" : "stones"}` : `Source a ${active}`}
+                {counts[active] ? `View ${active} diamonds` : `Ask for a ${active}`}
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-ivory transition-colors group-hover:bg-ivory group-hover:text-ink">
                   <ArrowGlyph />
                 </span>

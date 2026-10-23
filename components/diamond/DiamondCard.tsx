@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import type { Diamond } from "@/types/diamond";
-import { useCurrency } from "@/context/CurrencyContext";
 import { getDiamondWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import DiamondPhoto from "./DiamondPhoto";
@@ -15,7 +14,6 @@ export function originLabel(origin: Diamond["origin"]) {
 }
 
 export default function DiamondCard({ diamond, priority, className }: { diamond: Diamond; priority?: boolean; className?: string }) {
-  const { formatPrice } = useCurrency();
   const unavailable = diamond.availability && diamond.availability !== "Available";
 
   return (
@@ -48,7 +46,7 @@ export default function DiamondCard({ diamond, priority, className }: { diamond:
           )}
 
           <span className="absolute bottom-4 right-4 hidden translate-y-2 items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[12px] font-medium text-ink opacity-0 shadow-sm transition-all duration-500 ease-[var(--ease-luxe)] group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
-            View stone <ArrowGlyph />
+            View <ArrowGlyph />
           </span>
         </div>
 
@@ -60,10 +58,6 @@ export default function DiamondCard({ diamond, priority, className }: { diamond:
             <p className="numeric mt-1 truncate text-[12px] text-mute sm:text-[12.5px]">
               {diamond.color} · {diamond.clarity} · {diamond.cut}
             </p>
-          </div>
-          <div className="shrink-0 text-right">
-            <p className="numeric text-[13.5px] font-medium sm:text-[15px]">{formatPrice(diamond.indicativePriceUSD)}</p>
-            <p className="mt-1 text-[10.5px] text-faint">indicative</p>
           </div>
         </div>
       </Link>

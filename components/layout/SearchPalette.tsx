@@ -7,14 +7,12 @@ import { Search, CornerDownLeft } from "lucide-react";
 import Modal from "@/components/ui/Modal";
 import DiamondPhoto from "@/components/diamond/DiamondPhoto";
 import { ArrowGlyph } from "@/components/ui/Button";
-import { useCurrency } from "@/context/CurrencyContext";
 import { QUICK_SEARCHES, searchDiamonds } from "@/lib/search";
 import type { Diamond } from "@/types/diamond";
 import { cn } from "@/lib/utils";
 
 export default function SearchPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const router = useRouter();
-  const { formatPrice } = useCurrency();
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
   const listRef = useRef<HTMLDivElement>(null);
@@ -58,7 +56,7 @@ export default function SearchPalette({ open, onClose }: { open: boolean; onClos
   };
 
   return (
-    <Modal open={open} onClose={onClose} placement="top" label="Search the collection" showClose={false} className="overflow-hidden">
+    <Modal open={open} onClose={onClose} placement="top" label="Search diamonds" showClose={false} className="overflow-hidden">
       <div className="flex items-center gap-3 border-b border-line px-5 sm:px-6">
         <Search className="h-[18px] w-[18px] shrink-0 text-mute" strokeWidth={1.5} />
         <input
@@ -70,7 +68,7 @@ export default function SearchPalette({ open, onClose }: { open: boolean; onClos
             setActive(0);
           }}
           onKeyDown={onKeyDown}
-          placeholder="Stone ID, certificate, shape, carat, colour…"
+          placeholder="Search by ID, certificate, shape or carat"
           aria-label="Search diamonds"
           className="h-16 w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-faint"
         />
@@ -102,7 +100,7 @@ export default function SearchPalette({ open, onClose }: { open: boolean; onClos
       </div>
 
       <div ref={listRef} className="max-h-[52vh] overflow-y-auto p-2 sm:p-3">
-        <p className="eyebrow px-3 pb-2 pt-2">{query ? `${results.length} matching stones` : "From the private selection"}</p>
+        <p className="eyebrow px-3 pb-2 pt-2">{query ? `${results.length} results` : "Featured"}</p>
         <AnimatePresence mode="popLayout" initial={false}>
           {results.length ? (
             results.map((d, i) => (
@@ -136,21 +134,20 @@ export default function SearchPalette({ open, onClose }: { open: boolean; onClos
                     {d.color} · {d.clarity} · {d.cut} · {d.certification.laboratory} {d.certification.certificateNumber}
                   </span>
                 </span>
-                <span className="numeric shrink-0 text-right text-[14px] font-medium">{formatPrice(d.indicativePriceUSD)}</span>
               </motion.button>
             ))
           ) : (
             <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-4 py-12 text-center">
-              <p className="display text-2xl">No stone matches “{query}”.</p>
+              <p className="display text-2xl">No results for “{query}”.</p>
               <p className="mx-auto mt-2 max-w-sm text-[13px] text-mute">
-                Try a certificate number, a carat weight such as 0.85, a shape, or a colour grade (D, E, F).
+                Try a certificate number, a carat such as 1.5, or a shape.
               </p>
               <button
                 type="button"
                 onClick={() => go(`/diamonds?search=${encodeURIComponent(query)}`)}
                 className="link-draw mt-5 inline-flex items-center gap-2 text-[13px] font-medium"
               >
-                Search the full collection <ArrowGlyph />
+                Search all diamonds <ArrowGlyph />
               </button>
             </motion.div>
           )}
@@ -166,7 +163,7 @@ export default function SearchPalette({ open, onClose }: { open: boolean; onClos
           onClick={() => go(query ? `/diamonds?search=${encodeURIComponent(query)}` : "/diamonds")}
           className="group ml-auto inline-flex items-center gap-2 font-medium text-ink"
         >
-          Browse all stones <ArrowGlyph />
+          View all diamonds <ArrowGlyph />
         </button>
       </div>
     </Modal>

@@ -12,13 +12,11 @@ export default function FeaturedCollection() {
   const featured = diamondsData.filter((d) => d.featured).slice(0, 6);
 
   return (
-    <section className="border-t border-line py-24 sm:py-32" aria-label="Private selection">
+    <section className="border-t border-line py-24 sm:py-32" aria-label="Featured diamonds">
       <div className="shell">
         <SectionIntro
-          eyebrow="The private selection"
-          title={["Stones we would", { em: "set ourselves." }]}
-          description="Hand-picked from the vault for cut precision, eye-clean clarity and crisp transparency. Natural and lab-grown, all independently graded."
-          action={{ label: `View all ${diamondsData.length} stones`, href: "/diamonds" }}
+          title={["Featured", { em: "diamonds" }]}
+          action={{ label: "View all", href: "/diamonds" }}
         />
 
         <motion.div
@@ -44,7 +42,7 @@ export default function FeaturedCollection() {
 
         <div className="mt-16 flex justify-center sm:mt-24">
           <ButtonLink href="/diamonds" variant="outline" size="lg">
-            Open the full collection <ArrowGlyph />
+            View all diamonds <ArrowGlyph />
           </ButtonLink>
         </div>
       </div>

@@ -48,12 +48,12 @@ export async function POST(req: NextRequest) {
       success: true,
       referenceId,
       message:
-        "Your inquiry has been received by our Surat export desk. A diamond specialist will contact you within our trading hours window.",
+        "Thank you. We have your enquiry and will reply soon.",
     });
   } catch (error) {
     console.error("Inquiry API error:", error);
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please contact us directly via WhatsApp." },
+      { error: "Something went wrong. Please contact us on WhatsApp." },
       { status: 500 }
     );
   }

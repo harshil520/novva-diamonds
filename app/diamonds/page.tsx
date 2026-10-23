@@ -167,21 +167,13 @@ function CatalogContent() {
     <div className="pb-24 pt-[72px]">
       {/* Masthead */}
       <header className="shell pb-8 pt-12 sm:pt-16">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="eyebrow">The collection · Surat vault</p>
-            <TextReveal
-              as="h1"
-              immediate
-              segments={["Certified", { em: "loose diamonds" }]}
-              className="display mt-4 text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.98]"
-            />
-          </div>
-          <p className="max-w-sm text-[14px] leading-relaxed text-mute">
-            Every stone is precision-analysed, laser-inscribed and certified by GIA or IGI — ready for insured dispatch
-            worldwide.
-          </p>
-        </div>
+        <TextReveal
+          as="h1"
+          immediate
+          segments={["Certified", { em: "diamonds" }]}
+          className="display text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.98]"
+        />
+        <p className="mt-4 text-[14px] text-mute">1 carat and above. All GIA or IGI certified.</p>
         <div className="mt-10 border-y border-line py-2">
           <ShapeStrip catalog={catalog} />
         </div>
@@ -193,7 +185,7 @@ function CatalogContent() {
           <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-10 pr-2">
             <div className="mb-6 flex items-center justify-between">
               <p className="text-[13px] font-medium">
-                Refine {activeCount > 0 && <span className="numeric ml-1 rounded-full bg-ink px-1.5 py-0.5 text-[10.5px] text-ivory">{activeCount}</span>}
+                Filters {activeCount > 0 && <span className="numeric ml-1 rounded-full bg-ink px-1.5 py-0.5 text-[10.5px] text-ivory">{activeCount}</span>}
               </p>
               {activeCount > 0 && (
                 <button type="button" onClick={reset} className="link-draw text-[12px] text-mute hover:text-ink">
@@ -222,7 +214,7 @@ function CatalogContent() {
                 {(
                   [
                     ["grid", LayoutGrid, "Gallery view"],
-                    ["list", List, "Compare list view"],
+                    ["list", List, "List view"],
                   ] as const
                 ).map(([v, Icon, label]) => (
                   <button
@@ -253,17 +245,13 @@ function CatalogContent() {
                 transition={{ duration: 0.6, ease: EASE_LUXE }}
                 className="rounded-[28px] border border-line bg-paper px-6 py-16 text-center sm:px-12"
               >
-                <p className="eyebrow">No exact match</p>
-                <h2 className="display mx-auto mt-4 max-w-lg text-[2.2rem] leading-tight sm:text-[2.8rem]">
-                  Not in the vault today. <em>We can find it.</em>
-                </h2>
+                <h2 className="display mx-auto max-w-lg text-[2.2rem] leading-tight sm:text-[2.8rem]">No matching diamonds</h2>
                 <p className="mx-auto mt-4 max-w-md text-[14px] leading-relaxed text-mute">
-                  Working directly on the Surat Diamond Bourse, we see thousands of stones being polished every week. Tell
-                  us your specification and we will source it.
+                  Tell us what you are looking for and we will find it for you.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                   <ButtonLink href={sourcingUrl}>
-                    <WhatsAppIcon size={15} /> Request custom sourcing
+                    <WhatsAppIcon size={15} /> Ask on WhatsApp
                   </ButtonLink>
                   <Button variant="outline" onClick={() => openEnquiry({ topic: "Custom Sourcing" })}>
                     Send an enquiry
@@ -292,15 +280,14 @@ function CatalogContent() {
               </motion.ul>
             ) : (
               <div>
-                <div className="hidden grid-cols-[64px_1.6fr_repeat(5,minmax(0,0.7fr))_1fr_auto] gap-5 border-b border-ink px-3 pb-3 text-[10.5px] uppercase tracking-[0.14em] text-mute md:grid">
+                <div className="hidden grid-cols-[64px_1.6fr_repeat(5,minmax(0,0.7fr))_auto] gap-5 border-b border-ink px-3 pb-3 text-[10.5px] uppercase tracking-[0.14em] text-mute md:grid">
                   <span />
-                  <span>Stone</span>
+                  <span>Diamond</span>
                   <span>Colour</span>
                   <span>Clarity</span>
                   <span>Cut</span>
                   <span>Lab</span>
                   <span>Origin</span>
-                  <span>Indicative</span>
                   <span className="w-[76px]" />
                 </div>
                 <AnimatePresence initial={false}>
@@ -317,11 +304,11 @@ function CatalogContent() {
           {results.length > 0 && (
             <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-[28px] bg-porcelain/70 p-8 sm:flex-row sm:items-center sm:p-10">
               <div>
-                <p className="display text-[1.8rem] leading-tight">Not quite the one?</p>
-                <p className="mt-2 max-w-md text-[14px] text-mute">We source to specification from the bourse floor — ratios, matched pairs, investment carats.</p>
+                <p className="display text-[1.8rem] leading-tight">Can&apos;t find the right one?</p>
+                <p className="mt-2 max-w-md text-[14px] text-mute">Tell us what you need and we will find it.</p>
               </div>
               <ButtonLink href={sourcingUrl}>
-                <WhatsAppIcon size={15} /> Source a stone <ArrowGlyph />
+                <WhatsAppIcon size={15} /> Ask us <ArrowGlyph />
               </ButtonLink>
             </div>
           )}
@@ -353,7 +340,7 @@ function CatalogContent() {
 
       <Modal open={sheetOpen} onClose={() => setSheetOpen(false)} placement="bottom" label="Filter and sort" className="flex flex-col lg:hidden">
         <div className="flex items-center justify-between border-b border-line px-6 pb-4 pt-6">
-          <p className="display text-[1.6rem]">Refine</p>
+          <p className="display text-[1.6rem]">Filters</p>
         </div>
         <div className="flex-1 overflow-y-auto px-6 py-6">
           <div className="mb-6 border-b border-line pb-6">
@@ -392,7 +379,7 @@ function CatalogContent() {
 
 function CatalogSkeleton() {
   return (
-    <div className="shell pb-24 pt-[120px]" aria-busy="true" aria-label="Loading the collection">
+    <div className="shell pb-24 pt-[120px]" aria-busy="true" aria-label="Loading diamonds">
       <div className="skeleton h-4 w-40 rounded-full" />
       <div className="skeleton mt-5 h-16 w-3/4 max-w-xl rounded-2xl" />
       <div className="mt-16 grid grid-cols-2 gap-5 lg:grid-cols-3">

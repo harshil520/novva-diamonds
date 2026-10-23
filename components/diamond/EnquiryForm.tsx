@@ -16,6 +16,14 @@ export type EnquiryTopic = "Specific Stone" | "Custom Sourcing" | "Bulk / Trade"
 
 const TOPICS: EnquiryTopic[] = ["Specific Stone", "Custom Sourcing", "Bulk / Trade", "Certification", "General"];
 
+const TOPIC_LABELS: Record<EnquiryTopic, string> = {
+  "Specific Stone": "A listed diamond",
+  "Custom Sourcing": "Find me a diamond",
+  "Bulk / Trade": "Bulk order",
+  Certification: "Certificates",
+  General: "Other",
+};
+
 interface Props {
   diamond?: Diamond | null;
   topic?: EnquiryTopic;
@@ -26,7 +34,7 @@ type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
 function defaultMessage(diamond?: Diamond | null) {
   if (!diamond) return "";
-  return `I would like the current export price, a high-magnification video and delivery terms for the ${diamond.carat.toFixed(
+  return `Please share the price, a video and delivery details for the ${diamond.carat.toFixed(
     2
   )} ct ${diamond.shape} (${diamond.color} / ${diamond.clarity}, ${diamond.certification.laboratory} ${
     diamond.certification.certificateNumber
@@ -57,8 +65,8 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
   const validate = (): Errors => {
     const e: Errors = {};
     if (!values.name.trim()) e.name = "Please tell us your name.";
-    if (!values.email.trim()) e.email = "An email lets us send the quotation.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) e.email = "That email address looks incomplete.";
+    if (!values.email.trim()) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) e.email = "Please enter a valid email.";
     if (!values.message.trim()) e.message = "A line or two about what you are looking for.";
     return e;
   };
@@ -83,7 +91,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
       if (!res.ok || !data.success) throw new Error(data.error || "We could not send your enquiry.");
       setReference(data.referenceId);
       setState("sent");
-      toast({ tone: "success", title: "Enquiry received", description: "A specialist will reply within trading hours." });
+      toast({ tone: "success", title: "Enquiry received", description: "We will reply soon." });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "We could not send your enquiry.";
       setServerError(msg);
@@ -114,7 +122,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
           </motion.span>
           <h3 className="display mt-6 text-3xl">Thank you{values.name ? `, ${values.name.split(" ")[0]}` : ""}.</h3>
           <p className="mx-auto mt-3 max-w-sm text-[14px] leading-relaxed text-mute">
-            Your enquiry is with our Surat desk. Expect a reply {siteConfig.contact.averageResponseTime.toLowerCase()}.
+            We have your enquiry and will reply soon.
           </p>
           {reference && (
             <button
@@ -139,7 +147,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
               rel="noopener noreferrer"
               className="link-draw inline-flex items-center gap-2 text-[13.5px] font-medium"
             >
-              <WhatsAppIcon size={15} /> Prefer to talk now? Continue on WhatsApp
+              <WhatsAppIcon size={15} /> Or chat on WhatsApp
             </a>
           </div>
         </motion.div>
@@ -161,7 +169,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
             <Field id={`${uid}-email`} label="Email" required error={errors.email}>
               <input id={`${uid}-email`} type="email" autoComplete="email" value={values.email} onChange={set("email")} className={inputCls(errors.email)} />
             </Field>
-            <Field id={`${uid}-phone`} label="Phone / WhatsApp">
+            <Field id={`${uid}-phone`} label="Phone or WhatsApp">
               <input id={`${uid}-phone`} type="tel" autoComplete="tel" value={values.phone} onChange={set("phone")} className={inputCls()} />
             </Field>
             <Field id={`${uid}-country`} label="Delivery country">
@@ -172,13 +180,13 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
                     {m.name}
                   </option>
                 ))}
-                <option value="Other">Elsewhere</option>
+                <option value="Other">Other</option>
               </select>
             </Field>
           </div>
 
           <fieldset>
-            <legend className="mb-2.5 text-[12px] text-mute">Nature of enquiry</legend>
+            <legend className="mb-2.5 text-[12px] text-mute">What is this about?</legend>
             <div className="flex flex-wrap gap-2">
               {TOPICS.map((t) => (
                 <button
@@ -191,7 +199,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
                     values.inquiryType === t ? "border-ink bg-ink text-ivory" : "border-line text-ink-soft hover:border-ink/40"
                   )}
                 >
-                  {t}
+                  {TOPIC_LABELS[t]}
                 </button>
               ))}
             </div>
@@ -199,7 +207,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
 
           {diamond && (
             <div className="flex items-center justify-between rounded-2xl bg-porcelain/70 px-4 py-3 text-[12.5px]">
-              <span className="text-mute">Stone reference</span>
+              <span className="text-mute">Diamond ID</span>
               <span className="numeric font-medium tracking-wide">{diamond.id}</span>
             </div>
           )}
@@ -210,7 +218,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
               rows={compact ? 3 : 4}
               value={values.message}
               onChange={set("message")}
-              placeholder="Shape, carat, colour, clarity, budget, timeline…"
+              placeholder="Shape, carat, colour, clarity…"
               className={cn(inputCls(errors.message), "resize-none py-3 leading-relaxed")}
             />
           </Field>
@@ -225,9 +233,7 @@ export default function EnquiryForm({ diamond, topic, compact = false }: Props) 
           )}
 
           <div className="flex flex-col-reverse items-stretch gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[11.5px] leading-relaxed text-faint">
-              Private and never shared. Reply within {siteConfig.contact.averageResponseTime.replace("< ", "")}.
-            </p>
+            <p className="text-[11.5px] leading-relaxed text-faint">We never share your details.</p>
             <Button type="submit" size="lg" disabled={state === "sending"} className="sm:min-w-[190px]">
               {state === "sending" ? (
                 <>

@@ -10,17 +10,16 @@ import { getConciergeWhatsAppUrl } from "@/lib/whatsapp";
 import { EASE_LUXE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { useUI } from "@/components/providers/UIProvider";
-import CurrencySelect from "./CurrencySelect";
 import { WhatsAppIcon } from "@/components/ui/icons";
 
 export function useNavLinks() {
   const links = [
-    { label: "Collection", href: "/diamonds" },
-    { label: "Education", href: "/education" },
-    { label: "Maison", href: "/about" },
+    { label: "Diamonds", href: "/diamonds" },
+    { label: "Diamond Guide", href: "/education" },
+    { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
-  if (siteConfig.features.showJewelry) links.splice(1, 0, { label: "Jewellery", href: "/jewelry" });
+  if (siteConfig.features.showJewelry) links.splice(1, 0, { label: "Jewelry", href: "/jewelry" });
   return links;
 }
 
@@ -129,9 +128,6 @@ export default function Header() {
               <span className="hidden lg:inline">Search</span>
               <kbd className="hidden rounded border border-line bg-paper px-1.5 text-[10px] text-mute xl:inline">⌘K</kbd>
             </button>
-            <div className="hidden sm:block">
-              <CurrencySelect />
-            </div>
             <a
               href={whatsappUrl}
               target="_blank"
@@ -139,7 +135,7 @@ export default function Header() {
               className="group/btn ml-1 hidden h-9 items-center gap-2 rounded-full bg-ink px-4 text-[12.5px] font-medium text-ivory transition-shadow duration-500 hover:shadow-[0_10px_30px_-12px_rgb(18_18_18/0.6)] md:inline-flex"
             >
               <WhatsAppIcon size={14} />
-              Enquire
+              WhatsApp us
             </a>
           </div>
         </div>
@@ -150,7 +146,6 @@ export default function Header() {
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-           
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -169,9 +164,8 @@ export default function Header() {
                     <Link
                       href={l.href}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-baseline gap-4 py-2"
+                      className="block py-2"
                     >
-                      <span className="numeric w-6 text-[11px] text-faint">0{i + 1}</span>
                       <span className={cn("display text-[2.6rem] sm:text-6xl", isActive(l.href) ? "font-normal" : "")}>{l.label}</span>
                     </Link>
                   </motion.div>
@@ -185,17 +179,13 @@ export default function Header() {
               transition={{ delay: 0.45, duration: 0.5 }}
               className="shell space-y-5 border-t border-line py-8"
             >
-              <div className="flex items-center justify-between">
-                <span className="eyebrow">Currency</span>
-                <CurrencySelect align="right" />
-              </div>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 items-center justify-center gap-2.5 rounded-full bg-ink text-[14px] font-medium text-ivory"
               >
-                <WhatsAppIcon size={16} /> Enquire on WhatsApp
+                <WhatsAppIcon size={16} /> WhatsApp us
               </a>
               <p className="text-center text-[12px] text-mute">
                 <a href={`mailto:${siteConfig.contact.email}`} className="link-draw">

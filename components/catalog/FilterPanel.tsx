@@ -124,7 +124,7 @@ export default function FilterPanel({ catalog, showSearch = true }: { catalog: C
               type="search"
               value={filters.search}
               onChange={(e) => update("search", e.target.value)}
-              placeholder="ID, certificate, carat…"
+              placeholder="ID, certificate or carat"
               className="h-11 w-full rounded-xl border border-line bg-paper pl-10 pr-9 text-[13.5px] outline-none transition-colors placeholder:text-faint focus:border-ink"
             />
             {filters.search && (
@@ -179,7 +179,7 @@ export default function FilterPanel({ catalog, showSearch = true }: { catalog: C
         <Scale values={allDiamondClarities} columns={4} selected={filters.clarities} onToggle={(v) => toggle("clarities", v)} labels={["Flawless", "Slightly included"]} />
       </Group>
 
-      <Group title="Cut grade">
+      <Group title="Cut">
         <div className="flex flex-wrap gap-2">
           {allDiamondCuts.map((c) => (
             <Chip key={c} on={filters.cuts.includes(c)} onClick={() => toggle("cuts", c)}>
@@ -189,7 +189,7 @@ export default function FilterPanel({ catalog, showSearch = true }: { catalog: C
         </div>
       </Group>
 
-      <Group title="Grading laboratory">
+      <Group title="Lab">
         <div className="flex flex-wrap gap-2">
           {(["GIA", "IGI"] as const).map((l) => (
             <Chip key={l} on={filters.labs.includes(l)} onClick={() => toggle("labs", l)}>

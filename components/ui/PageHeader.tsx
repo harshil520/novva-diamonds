@@ -12,7 +12,7 @@ export default function PageHeader({
   crumbs,
   aside,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: Segment[];
   intro?: React.ReactNode;
   crumbs?: { label: string; href?: string }[];
@@ -38,10 +38,12 @@ export default function PageHeader({
       )}
       <div className="grid items-end gap-10 lg:grid-cols-12">
         <div className={aside ? "lg:col-span-7" : "lg:col-span-10"}>
-          <Reveal>
-            <p className="eyebrow">{eyebrow}</p>
-          </Reveal>
-          <TextReveal as="h1" immediate segments={title} className="display mt-5 text-[clamp(2.7rem,6.4vw,6rem)] leading-[0.97]" />
+          {eyebrow && (
+            <Reveal>
+              <p className="eyebrow mb-5">{eyebrow}</p>
+            </Reveal>
+          )}
+          <TextReveal as="h1" immediate segments={title} className="display text-[clamp(2.7rem,6.4vw,6rem)] leading-[0.97]" />
           {intro && (
             <Reveal delay={0.2}>
               <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-ink-soft/85 sm:text-[17px]">{intro}</p>
