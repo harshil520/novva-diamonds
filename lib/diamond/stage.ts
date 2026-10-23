@@ -128,8 +128,10 @@ export class DiamondStage implements EngineClient {
         uModel: { value: new Matrix4() },
         uModelInverse: { value: new Matrix4() },
         uIor: { value: 2.417 },
+        // 1.0 = diamond's physical dispersion (0.044)
+        uDispersion: { value: 1.0 },
         uBounces: { value: 4 },
-        uExposure: { value: 1.1 },
+        uExposure: { value: 1.7 },
         uEnvSpin: { value: 0 },
         uOpacity: { value: 1 },
       },
