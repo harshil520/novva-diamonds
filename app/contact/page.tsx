@@ -7,11 +7,15 @@ import PageHeader from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import EnquiryForm from "@/components/diamond/EnquiryForm";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Novva Diamonds",
-  description: "Contact Novva Diamonds in Surat by WhatsApp, phone or email.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Novva Diamonds | Surat Diamond Bourse, India",
+  description:
+    "Contact Novva Diamonds at the Surat Diamond Bourse by WhatsApp, phone or email. Mon to Sat, 9:30 am to 7:30 pm IST. Most replies within 15 minutes.",
+  path: "/contact",
+  absoluteTitle: true,
+});
 
 const SOURCING_MAIL = `mailto:${siteConfig.contact.email}?subject=Diamond%20Enquiry%20-%20Novva%20Diamonds&body=Hello%20Novva%20Diamonds,%0A%0AI%20am%20looking%20for:%0A-%20Shape:%0A-%20Carat:%0A-%20Colour:%0A-%20Clarity:%0A-%20Certificate%20(GIA/IGI):%0A-%20Delivery%20country:%0A%0AThank%20you.`;
 

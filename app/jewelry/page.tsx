@@ -5,10 +5,16 @@ import PageHeader from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import DiamondCanvas from "@/components/three/DiamondCanvas";
+import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Jewelry | Novva Diamonds",
-  description: "Diamond jewelry in 18K gold and platinum.",
+  ...pageMetadata({
+    title: "Diamond Jewelry",
+    description: "Diamond jewelry in 18K gold and platinum, set with certified diamonds from Surat.",
+    path: "/jewelry",
+  }),
+  // Keep the placeholder out of the index until the collection launches.
+  robots: siteConfig.features.showJewelry ? undefined : { index: false, follow: true },
 };
 
 const PIECES = [

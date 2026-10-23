@@ -3,15 +3,21 @@ import Link from "next/link";
 import PageHeader from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
+import JsonLd from "@/components/seo/JsonLd";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 type Segment = string | { em: string };
 
 export const GUIDES = [
-  { href: "/education/4cs", title: "The 4Cs", short: "Cut, colour, clarity and carat" },
-  { href: "/education/certification", title: "Certificates", short: "How to check a GIA or IGI report" },
-  { href: "/education/natural-vs-lab-grown", title: "Natural vs lab-grown", short: "The differences, simply explained" },
+  { href: "/education/4cs", title: "The 4Cs", short: "Cut, colour, clarity and carat", headline: "The 4Cs of diamonds: cut, colour, clarity and carat" },
+  { href: "/education/certification", title: "Certificates", short: "How to check a GIA or IGI report", headline: "GIA and IGI diamond certificates and how to verify one" },
+  { href: "/education/natural-vs-lab-grown", title: "Natural vs lab-grown", short: "The differences, simply explained", headline: "Natural vs lab-grown diamonds: the differences" },
 ];
+
+// First publication of the guides; bump GUIDES_UPDATED when their content changes.
+const GUIDES_PUBLISHED = "2026-10-07";
+const GUIDES_UPDATED = "2026-10-23";
 
 export function ArticleShell({
   eyebrow,
@@ -30,9 +36,26 @@ export function ArticleShell({
 }) {
   const idx = GUIDES.findIndex((g) => g.href === current);
   const next = GUIDES[(idx + 1) % GUIDES.length];
+  const guide = GUIDES[idx];
 
   return (
     <article className="pb-10">
+      <JsonLd
+        data={[
+          articleJsonLd({
+            headline: guide?.headline ?? crumb,
+            description: typeof intro === "string" ? intro : undefined,
+            path: current,
+            datePublished: GUIDES_PUBLISHED,
+            dateModified: GUIDES_UPDATED,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Diamond Guide", path: "/education" },
+            { name: crumb, path: current },
+          ]),
+        ]}
+      />
       <PageHeader
         eyebrow={eyebrow}
         title={title}

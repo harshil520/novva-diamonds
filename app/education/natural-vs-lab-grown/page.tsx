@@ -2,11 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { ArticleShell, ArticleSection, ArticleCTA } from "@/components/education/Article";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Natural vs Lab-Grown Diamonds | Novva Diamonds",
-  description: "The differences between natural and lab-grown diamonds, simply explained.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Natural vs Lab-Grown Diamonds: The Differences",
+  description:
+    "Natural and lab-grown diamonds look the same and are equally hard. Learn how they differ in origin and certification, and which suits your budget.",
+  path: "/education/natural-vs-lab-grown",
+});
 
 const comparisonTable = [
   { parameter: "Material", natural: "Pure carbon", labGrown: "Pure carbon" },

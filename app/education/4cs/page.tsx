@@ -2,11 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { ArticleShell, ArticleSection, Prose, ArticleCTA } from "@/components/education/Article";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "The 4Cs of Diamonds | Novva Diamonds",
-  description: "Cut, colour, clarity and carat, explained simply.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "The 4Cs of Diamonds: Cut, Colour, Clarity, Carat",
+  description:
+    "What cut, colour, clarity and carat mean: the D to Z colour scale, clarity grades from FL to SI2, why cut drives sparkle, and why carat is weight, not size.",
+  path: "/education/4cs",
+});
 
 const COLOR_BANDS = [
   { grades: "D · E · F", name: "Colourless", body: "No visible colour.", tone: "bg-paper" },

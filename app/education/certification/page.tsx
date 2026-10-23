@@ -2,11 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { ArticleShell, ArticleSection, Prose, FactGrid, ArticleCTA } from "@/components/education/Article";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Diamond Certificates | Novva Diamonds",
-  description: "What a GIA or IGI certificate is, and how to check one.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "GIA and IGI Diamond Certificates Explained",
+  description:
+    "What a GIA or IGI diamond grading report contains, how the laser inscription works, and how to check a report number on the lab's website.",
+  path: "/education/certification",
+});
 
 const STEPS = [
   {

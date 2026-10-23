@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { FAQ_ITEMS } from "@/data/faq";
 import { getConciergeWhatsAppUrl } from "@/lib/whatsapp";
@@ -45,20 +45,17 @@ export default function FAQ() {
                       <Plus className="h-4 w-4" strokeWidth={1.4} />
                     </span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        id={`faq-${item.id}`}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.55, ease: EASE_LUXE }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-2xl pb-7 pr-4 text-[15px] leading-relaxed text-ink-soft/85 sm:pr-12">{item.answer}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Always in the DOM so crawlers and AI agents read every answer; collapsed ones are inert. */}
+                  <motion.div
+                    id={`faq-${item.id}`}
+                    initial={false}
+                    animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.55, ease: EASE_LUXE }}
+                    inert={!isOpen}
+                    className="overflow-hidden"
+                  >
+                    <p className="max-w-2xl pb-7 pr-4 text-[15px] leading-relaxed text-ink-soft/85 sm:pr-12">{item.answer}</p>
+                  </motion.div>
                 </li>
               );
             })}

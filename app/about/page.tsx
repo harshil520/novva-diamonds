@@ -8,11 +8,15 @@ import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import DiamondCanvas from "@/components/three/DiamondCanvas";
 import { getConciergeWhatsAppUrl } from "@/lib/whatsapp";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Us | Novva Diamonds",
-  description: "Novva Diamonds sells GIA and IGI certified natural and lab-grown diamonds directly from Surat, India.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About Novva Diamonds | Diamond Dealer, Surat Diamond Bourse",
+  description:
+    "Novva Diamonds sells GIA and IGI certified natural and lab-grown loose diamonds directly from the Surat Diamond Bourse in India, shipped fully insured worldwide.",
+  path: "/about",
+  absoluteTitle: true,
+});
 
 const STATS = [
   { v: "90%+", n: "of the world's diamonds are cut in Surat" },

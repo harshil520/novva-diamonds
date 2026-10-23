@@ -7,7 +7,9 @@ import DiamondCard from "@/components/diamond/DiamondCard";
 import { StoneActions, CertificateCard, MobileStoneBar } from "@/components/diamond/StoneActions";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
+import JsonLd from "@/components/seo/JsonLd";
 import { diamondsData } from "@/data/diamonds";
+import { breadcrumbJsonLd, diamondDescription, diamondJsonLd, diamondName, pageMetadata } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -20,11 +22,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const diamond = diamondsData.find((d) => d.id === id);
-  if (!diamond) return { title: "Diamond Not Found | Novva Diamonds" };
+  if (!diamond) return { title: "Diamond Not Found", robots: { index: false } };
 
+  const base = pageMetadata({
+    title: `${diamondName(diamond)}, ${diamond.certification.laboratory}`,
+    description: diamondDescription(diamond),
+    path: `/diamonds/${diamond.id}`,
+  });
+  const image = { url: diamond.images[0], alt: diamondName(diamond) };
   return {
-    title: `${diamond.carat.toFixed(2)} ct ${diamond.shape} ${diamond.origin} Diamond, ${diamond.color} ${diamond.clarity} | Novva Diamonds`,
-    description: `${diamond.carat.toFixed(2)} ct ${diamond.shape} ${diamond.origin.toLowerCase()} diamond. ${diamond.color} colour, ${diamond.clarity} clarity, ${diamond.cut} cut. ${diamond.certification.laboratory} report ${diamond.certification.certificateNumber}.`,
+    ...base,
+    openGraph: { ...base.openGraph, images: [image] },
+    twitter: { ...base.twitter, images: [image] },
   };
 }
 
@@ -91,6 +100,16 @@ export default async function DiamondDetailPage({ params }: PageProps) {
 
   return (
     <div className="pb-16 pt-[72px]">
+      <JsonLd
+        data={[
+          diamondJsonLd(diamond),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Diamonds", path: "/diamonds" },
+            { name: diamondName(diamond), path: `/diamonds/${diamond.id}` },
+          ]),
+        ]}
+      />
       <div className="shell">
         <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 py-6 text-[12px] text-mute">
           <Link href="/" className="link-draw hover:text-ink">

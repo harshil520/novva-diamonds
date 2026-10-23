@@ -5,15 +5,25 @@ import PageHeader from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowGlyph } from "@/components/ui/Button";
 import { GUIDES } from "@/components/education/Article";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Diamond Guide | Novva Diamonds",
-  description: "Simple guides to the 4Cs, diamond certificates, and natural vs lab-grown diamonds.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Diamond Buying Guide: 4Cs and Certificates",
+  description:
+    "Plain-English guides to buying a diamond: the 4Cs, how to read and verify a GIA or IGI certificate, and how natural and lab-grown diamonds differ.",
+  path: "/education",
+});
 
 export default function EducationHubPage() {
   return (
     <div className="pb-24">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Diamond Guide", path: "/education" },
+        ])}
+      />
       <PageHeader title={["Diamond", { em: "guide" }]} intro="Short, simple guides to help you choose a diamond." />
       <div className="shell">
         <ol className="border-t border-ink">
